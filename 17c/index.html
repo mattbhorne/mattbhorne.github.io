@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>17.C-起草官网 - 在线文档起草与规范写作工具平台</title>
+<meta name="description" content="17.C 起草官网提供在线文档起草、合同模板、公文写作、规范排版与协作审阅功能，帮助个人与企业快速完成规范、清晰、可交付的文字材料。">
+<meta name="keywords" content="17.C,起草官网,在线起草,文档起草,合同模板,公文写作,规范排版,协作审阅">
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+<style>
+  :root{
+    --ink:#1c2333;
+    --ink-soft:#4a5468;
+    --line:#e2e6ef;
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --brand:#2f5fd0;
+    --brand-deep:#1d3f96;
+    --brand-soft:#eaf0ff;
+    --accent:#0f9b8e;
+    --accent-soft:#e3f6f3;
+    --warn:#b45309;
+    --warn-soft:#fdf3e3;
+    --radius:12px;
+    --shadow:0 2px 10px rgba(28,35,51,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB","Source Han Sans SC",sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.75;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;}
+  .wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 20px;}
+
+  /* ---------- 顶部公告条 ---------- */
+  .topbar{
+    background:var(--brand-deep);
+    color:#dce6ff;
+    font-size:13px;
+    letter-spacing:.2px;
+  }
+  .topbar .wrap{
+    display:flex;justify-content:space-between;align-items:center;
+    gap:12px;min-height:38px;flex-wrap:wrap;
+  }
+  .topbar span.dot{color:#7fa3ff;}
+
+  /* ---------- 页眉 ---------- */
+  header.site-head{
+    background:var(--card);
+    border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:50;
+    box-shadow:0 1px 0 rgba(28,35,51,.03);
+  }
+  .head-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:24px;min-height:70px;flex-wrap:wrap;
+  }
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px;letter-spacing:.3px;}
+  .logo-mark{
+    width:38px;height:38px;border-radius:10px;flex:0 0 38px;
+    background:linear-gradient(140deg,var(--brand) 0%,var(--accent) 100%);
+    color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:15px;font-weight:800;letter-spacing:-.5px;
+  }
+  .logo small{display:block;font-size:11px;font-weight:400;color:var(--ink-soft);letter-spacing:.5px;}
+  nav.main-nav ul{display:flex;gap:6px;list-style:none;flex-wrap:wrap;}
+  nav.main-nav a{
+    display:block;padding:8px 14px;border-radius:8px;
+    font-size:15px;color:var(--ink-soft);transition:.18s;
+  }
+  nav.main-nav a:hover{background:var(--brand-soft);color:var(--brand-deep);}
+  .head-cta{display:flex;gap:10px;align-items:center;}
+  .btn{
+    display:inline-block;padding:10px 20px;border-radius:9px;
+    font-size:15px;font-weight:600;transition:.18s;border:1px solid transparent;
+    cursor:pointer;text-align:center;
+  }
+  .btn-primary{background:var(--brand);color:#fff;}
+  .btn-primary:hover{background:var(--brand-deep);}
+  .btn-ghost{background:#fff;color:var(--brand-deep);border-color:#c9d6f5;}
+  .btn-ghost:hover{background:var(--brand-soft);}
+
+  /* ---------- 首屏 ---------- */
+  .hero{
+    background:linear-gradient(165deg,#f7f9ff 0%,#eef3ff 55%,#f5f7fb 100%);
+    padding:56px 0 48px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:start;
+  }
+  .hero h1{
+    font-size:34px;line-height:1.35;font-weight:800;letter-spacing:.2px;
+    margin-bottom:16px;
+  }
+  .hero h1 em{font-style:normal;color:var(--brand);}
+  .hero-lead{font-size:16.5px;color:var(--ink-soft);margin-bottom:22px;max-width:620px;}
+  .hero-points{list-style:none;display:grid;gap:10px;margin-bottom:26px;}
+  .hero-points li{
+    display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--ink-soft);
+  }
+  .hero-points li::before{
+    content:"✓";flex:0 0 20px;height:20px;margin-top:3px;
+    background:var(--accent-soft);color:var(--accent);
+    border-radius:50%;font-size:12px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+  .hero-note{margin-top:14px;font-size:13px;color:#7b8494;}
+
+  /* 起草流程面板 */
+  .flow-card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:22px;
+  }
+  .flow-card h2{
+    font-size:16px;font-weight:700;margin-bottom:4px;
+  }
+  .flow-card p.sub{font-size:13px;color:var(--ink-soft);margin-bottom:16px;}
+  .flow-list{list-style:none;counter-reset:step;}
+  .flow-list li{
+    counter-increment:step;
+    display:flex;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);
+    font-size:14.5px;color:var(--ink-soft);
+  }
+  .flow-list li:last-child{border-bottom:0;}
+  .flow-list li::before{
+    content:counter(step);
+    flex:0 0 24px;height:24px;border-radius:7px;
+    background:var(--brand-soft);color:var(--brand-deep);
+    font-size:13px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .flow-list strong{color:var(--ink);font-weight:600;display:block;font-size:14.5px;}
+
+  /* ---------- 通用区块 ---------- */
+  section{padding:52px 0;}
+  section.alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .sec-head{margin-bottom:28px;max-width:760px;}
+  .sec-head .kicker{
+    display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:1.5px;
+    color:var(--brand);background:var(--brand-soft);
+    padding:4px 10px;border-radius:6px;margin-bottom:12px;
+  }
+  .sec-head h2{font-size:25px;font-weight:800;line-height:1.4;margin-bottom:10px;}
+  .sec-head p{color:var(--ink-soft);font-size:15.5px;}
+
+  /* 文档类型卡片 */
+  .type-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  }
+  .type-card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;box-shadow:var(--shadow);transition:.2s;
+  }
+  .type-card:hover{transform:translateY(-3px);border-color:#c9d6f5;}
+  .type-card .tag{
+    display:inline-block;font-size:12px;font-weight:600;color:var(--brand-deep);
+    background:var(--brand-soft);border-radius:5px;padding:2px 8px;margin-bottom:12px;
+  }
+  .type-card h3{font-size:17px;font-weight:700;margin-bottom:8px;}
+  .type-card p{font-size:14.5px;color:var(--ink-soft);}
+  .type-card ul{margin-top:12px;list-style:none;display:grid;gap:6px;}
+  .type-card ul li{
+    font-size:13.5px;color:var(--ink-soft);padding-left:15px;position:relative;
+  }
+  .type-card ul li::before{
+    content:"";position:absolute;left:0;top:9px;width:5px;height:5px;
+    border-radius:50%;background:var(--accent);
+  }
+
+  /* 功能列表 */
+  .feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+  .feature{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;display:flex;gap:16px;box-shadow:var(--shadow);
+  }
+  .feature .ico{
+    flex:0 0 42px;height:42px;border-radius:10px;
+    background:linear-gradient(140deg,#eaf0ff,#e3f6f3);
+    display:flex;align-items:center;justify-content:center;
+    font-size:19px;
+  }
+  .feature h3{font-size:16.5px;font-weight:700;margin-bottom:6px;}
+  .feature p{font-size:14.5px;color:var(--ink-soft);}
+
+  /* 规范要点 */
+  .rules{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:16px 32px;
+    list-style:none;margin-top:8px;
+  }
+  .rules li{
+    background:#fff;border-left:3px solid var(--brand);
+    border-radius:0 8px 8px 0;
+    padding:14px 18px;box-shadow:var(--shadow);
+  }
+  .rules li strong{display:block;font-size:15px;margin-bottom:4px;}
+  .rules li span{font-size:14px;color:var(--ink-soft);}
+
+  /* 场景表格 */
+  .scene-table{
+    width:100%;border-collapse:collapse;background:#fff;
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+    font-size:14.5px;
+  }
+  .scene-table th,.scene-table td{
+    padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  .scene-table th{
+    background:#f0f4fd;font-weight:700;font-size:14px;color:var(--brand-deep);
+    white-space:nowrap;
+  }
+  .scene-table tr:last-child td{border-bottom:0;}
+  .scene-table td:first-child{font-weight:600;white-space:nowrap;}
+
+  /* 提示区 */
+  .notice{
+    background:var(--warn-soft);border:1px solid #f3ddb8;border-radius:var(--radius);
+    padding:20px 22px;margin-top:24px;
+  }
+  .notice h3{font-size:16px;color:var(--warn);margin-bottom:8px;}
+  .notice p{font-size:14.5px;color:#7c5312;}
+
+  /* FAQ */
+  .faq{display:grid;gap:12px;}
+  details{
+    background:#fff;border:1px solid var(--line);border-radius:10px;
+    padding:0 18px;box-shadow:var(--shadow);
+  }
+  details[open]{border-color:#c9d6f5;}
+  summary{
+    cursor:pointer;list-style:none;padding:16px 0;
+    font-size:15.5px;font-weight:600;display:flex;justify-content:space-between;
+    gap:14px;align-items:center;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::after{
+    content:"+";flex:0 0 22px;height:22px;border-radius:6px;
+    background:var(--brand-soft);color:var(--brand-deep);
+    font-size:15px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+  details[open] summary::after{content:"–";}
+  details p{
+    font-size:14.5px;color:var(--ink-soft);
+    padding:0 0 18px;border-top:1px dashed var(--line);padding-top:14px;
+  }
+
+  /* 侧栏 + 主体布局 */
+  .split{display:grid;grid-template-columns:1fr 320px;gap:32px;align-items:start;}
+  aside.side{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;box-shadow:var(--shadow);position:sticky;top:96px;
+  }
+  aside.side h3{font-size:16px;font-weight:700;margin-bottom:14px;}
+  aside.side ul{list-style:none;display:grid;gap:10px;}
+  aside.side ul li{
+    font-size:14px;color:var(--ink-soft);padding-left:16px;position:relative;
+  }
+  aside.side ul li::before{
+    content:"";position:absolute;left:0;top:8px;width:6px;height:6px;
+    border-radius:2px;background:var(--brand);
+  }
+  aside.side .side-cta{
+    margin-top:18px;padding-top:18px;border-top:1px dashed var(--line);
+  }
+  aside.side .side-cta p{font-size:13.5px;color:var(--ink-soft);margin-bottom:12px;}
+
+  /* ---------- 页脚 ---------- */
+  footer.site-foot{
+    background:#151b28;color:#9aa5b8;padding:46px 0 24px;font-size:14px;
+    margin-top:8px;
+  }
+  .foot-grid{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;
+    padding-bottom:28px;border-bottom:1px solid #262e3f;
+  }
+  .foot-grid h4{color:#fff;font-size:15px;margin-bottom:12px;font-weight:700;}
+  .foot-grid ul{list-style:none;display:grid;gap:8px;}
+  .foot-grid a:hover{color:#fff;}
+  .foot-brand .logo{color:#fff;margin-bottom:12px;}
+  .foot-brand .logo small{color:#8b96ab;}
+  .foot-brand p{font-size:13.5px;line-height:1.8;max-width:320px;}
+  .foot-bottom{
+    padding-top:20px;display:flex;justify-content:space-between;
+    gap:14px;flex-wrap:wrap;font-size:13px;color:#7b8698;
+  }
+
+  /* ---------- 响应式 ---------- */
+  @media (max-width:1024px){
+    .hero-grid{grid-template-columns:1fr;gap:32px;}
+    .type-grid{grid-template-columns:repeat(2,1fr);}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .split{grid-template-columns:1fr;}
+    aside.side{position:static;}
+  }
+  @media (max-width:720px){
+    body{font-size:15.5px;}
+    .head-inner{min-height:auto;padding:12px 0;gap:12px;}
+    nav.main-nav ul{gap:2px;}
+    nav.main-nav a{padding:7px 10px;font-size:14px;}
+    .head-cta{width:100%;}
+    .head-cta .btn{flex:1;}
+    .hero{padding:36px 0 32px;}
+    .hero h1{font-size:25px;}
+    section{padding:38px 0;}
+    .sec-head h2{font-size:21px;}
+    .type-grid{grid-template-columns:1fr;}
+    .feature-grid{grid-template-columns:1fr;}
+    .rules{grid-template-columns:1fr;}
+    .scene-table{display:block;overflow-x:auto;white-space:nowrap;}
+    .scene-table td,.scene-table th{white-space:normal;}
+    .foot-grid{grid-template-columns:1fr;gap:22px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span>17.C 起草平台 · 规范写作从第一稿开始</span>
+    <span class="dot">模板与规范说明持续更新，具体条款请以实际适用法律法规及单位制度为准</span>
+  </div>
+</div>
+
+<header class="site-head">
+  <div class="wrap head-inner">
+    <a class="logo" href="#top">
+      <span class="logo-mark">17C</span>
+      <span>17.C 起草官网<small>在线文档起草与规范写作</small></span>
+    </a>
+    <nav class="main-nav" aria-label="主导航">
+      <ul>
+        <li><a href="#types">文档类型</a></li>
+        <li><a href="#features">起草功能</a></li>
+        <li><a href="#rules">规范要点</a></li>
+        <li><a href="#scenes">适用场景</a></li>
+        <li><a href="#faq">常见问题</a></li>
+      </ul>
+    </nav>
+    <div class="head-cta">
+      <a class="btn btn-ghost" href="#types">浏览模板</a>
+      <a class="btn btn-primary" href="#start">开始起草</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 首屏 -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>17.C 起草官网：把一份材料从<em>想法</em>写到<em>可交付</em></h1>
+        <p class="hero-lead">
+          起草不是把字打出来，而是把目的、依据、事实和结论按清晰的顺序组织好。17.C 围绕合同、公文、通知、报告、方案等常见材料，提供结构模板、写作要点提示、格式规范与协作审阅支持，帮助你在动笔之前先想清楚，在提交之前先检查到位。
+        </p>
+        <ul class="hero-points">
+          <li>按材料类型选择骨架：标题、主送对象、正文层次、落款与附件位置一目了然</li>
+          <li>起草要点逐项提示：事实是否完整、依据是否可查、责任是否明确、期限是否可执行</li>
+          <li>格式与用语规范参考：层次序号、数字用法、称谓与结束语按通行惯例整理</li>
+          <li>支持多轮修改与协作审阅，保留版本脉络，避免反复覆盖造成内容丢失</li>
+        </ul>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#start">免费开始起草</a>
+          <a class="btn btn-ghost" href="#types">查看文档类型</a>
+        </div>
+        <p class="hero-note">无需安装客户端，浏览器打开即可使用；模板内容为写作参考，不构成法律意见。</p>
+      </div>
+
+      <div class="flow-card" id="start">
+        <h2>一次完整起草的五个步骤</h2>
+        <p class="sub">适用于绝大多数正式材料，顺序可按实际情况调整。</p>
+        <ol class="flow-list">
+          <li><span><strong>明确目的与对象</strong>这份材料要解决什么问题、给谁看、希望对方做什么。</span></li>
+          <li><span><strong>收集事实与依据</strong>时间、主体、金额、数量、约定来源，逐项核对可查证。</span></li>
+          <li><span><strong>搭结构再填内容</strong>先列层次标题，再逐段展开，避免边写边想导致逻辑断裂。</span></li>
+          <li><span><strong>校对格式与用语</strong>检查序号、称谓、日期、数字、单位与结束语是否统一。</span></li>
+          <li><span><strong>复核与定稿归档</strong>确认无歧义、无遗漏、无前后矛盾后再提交并留存版本。</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 文档类型 -->
+  <section id="types">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">文档类型</span>
+        <h2>按材料类型选择起草骨架</h2>
+        <p>不同类型的材料，读者关心的问题并不相同。合同看权责与救济，通知看事项与时限，报告看事实与结论，方案看目标与路径。先选对类型，再组织内容，能显著减少返工。</p>
+      </div>
+
+      <div class="type-grid">
+        <article class="type-card">
+          <span class="tag">合同协议</span>
+          <h3>合同与协议类</h3>
+          <p>围绕交易或合作关系，明确双方权利义务、履行方式与违约处理。</p>
+          <ul>
+            <li>当事人信息与签署主体资格</li>
+            <li>标的、数量、质量与价款</li>
+            <li>履行期限、地点与验收方式</li>
+            <li>违约责任、争议解决与生效条件</li>
+          </ul>
+        </article>
+
+        <article class="type-card">
+          <span class="tag">行政公文</span>
+          <h3>通知、通报与请示</h3>
+          <p>用于内部或上下级之间传达事项、说明情况、请求批准。</p>
+          <ul>
+            <li>标题三要素：发文机关、事由、文种</li>
+            <li>主送对象与抄送范围</li>
+            <li>事项表述清晰、时限明确</li>
+            <li>落款单位、日期与印章位置</li>
+          </ul>
+        </article>
+
+        <article class="type-card">
+          <span class="tag">报告总结</span>
+          <h3>报告、总结与汇报</h3>
+          <p>面向管理层或外部机构，陈述工作过程、结果与后续安排。</p>
+          <ul>
+            <li>结论先行，再展开数据与过程</li>
+            <li>区分已完成事项与待办事项</li>
+            <li>问题描述附原因分析与建议</li>
+            <li>避免只罗列过程而缺少判断</li>
+          </ul>
+        </article>
+
+        <article class="type-card">
+          <span class="tag">方案计划</span>
+          <h3>方案、计划与预案</h3>
+          <p>为某项工作提供目标、路径、分工与资源安排。</p>
+          <ul>
+            <li>背景与目标可衡量、可验证</li>
+            <li>任务分解到责任人与时间节点</li>
+            <li>说明所需资源与前置条件</li>
+            <li>列出风险点与应对措施</li>
+          </ul>
+        </article>
+
+        <article class="type-card">
+          <span class="tag">函件说明</span>
+          <h3>函、说明与承诺书</h3>
+          <p>用于对外沟通、事项澄清或单方意思表示。</p>
+          <ul>
+            <li>一函一事，避免多主题混杂</li>
+            <li>说明缘由、请求与期望回复时间</li>
+            <li>承诺内容须具体、可履行</li>
+            <li>保留送达与签收记录</li>
+          </ul>
+        </article>
+
+        <article class="type-card">
+          <span class="tag">制度规范</span>
+          <h3>制度、办法与规程</h3>
+          <p>用于内部管理，规定流程、权限与执行标准。</p>
+          <ul>
+            <li>总则说明目的、依据与适用范围</li>
+            <li>分章规定职责、流程与权限</li>
+            <li>明确违规处理与解释部门</li>
+            <li>注明施行日期与新老衔接</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 起草功能 -->
+  <section class="alt" id="features">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">起草功能</span>
+        <h2>围绕“写清楚”设计的实用能力</h2>
+        <p>工具的价值不在于替你写完，而在于让你少漏项、少歧义、少返工。以下功能均围绕起草过程中的真实痛点展开。</p>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature">
+          <div class="ico">🧩</div>
+          <div>
+            <h3>结构化骨架</h3>
+            <p>按文种提供标题、层次、落款与附件的标准位置，新建文档即可获得可用的排版框架，避免从空白页开始。</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="ico">📌</div>
+          <div>
+            <h3>要点检查清单</h3>
+            <p>针对合同、通知、报告等类型列出必填信息项，逐条勾选确认，降低关键条款或要素被遗漏的概率。</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="ico">✍️</div>
+          <div>
+            <h3>用语与格式提示</h3>
+            <p>对层次序号、数字用法、日期写法、称谓与结束语给出参考写法，帮助成稿保持统一、正式的书面风格。</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="ico">🔄</div>
+          <div>
+            <h3>版本与协作审阅</h3>
+            <p>多人修改时保留历史版本，可对比差异、标注待确认处，避免口头传达造成的理解偏差。</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="ico">🔍</div>
+          <div>
+            <h3>一致性自查</h3>
+            <p>提示前后主体名称、金额、日期、数量是否一致，减少同一份材料中自相矛盾的低级错误。</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="ico">🗂️</div>
+          <div>
+            <h3>分类归档</h3>
+            <p>按项目、部门或时间整理文档，便于后续查找同类材料的写法，形成可复用的起草积累。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 规范要点 + 侧栏 -->
+  <section id="rules">
+    <div class="wrap split">
+      <div>
+        <div class="sec-head">
+          <span class="kicker">规范要点</span>
+          <h2>起草时最容易被忽略的几件事</h2>
+          <p>以下要点来自常见返工原因，不涉及具体法律条文解释，仅作为写作自查参考。</p>
+        </div>
+
+        <ul class="rules">
+          <li>
+            <strong>主体名称写全称</strong>
+            <span>首次出现使用全称并与登记信息一致，简称需在首次出现时注明，避免签署后主体不清。</span>
+          </li>
+          <li>
+            <strong>时间节点可执行</strong>
+            <span>“尽快”“近期”等表述难以判断是否履行，建议改为具体日期或可计算的天数。</span>
+          </li>
+          <li>
+            <strong>权利义务成对出现</strong>
+            <span>一方承担的义务，应明确对应的验收、付款或配合安排，避免单方约束失衡。</span>
+          </li>
+          <li>
+            <strong>金额与数量一致</strong>
+            <span>大小写金额、单价与总价、数量与单位需交叉核对，正文与附件保持同一口径。</span>
+          </li>
+          <li>
+            <strong>层次序号统一</strong>
+            <span>同一份材料中不要混用多套序号体系，层级一般不超过四层，便于阅读和引用。</span>
+          </li>
+          <li>
+            <strong>变更留痕</strong>
+            <span>修改处应保留版本说明，重要条款调整建议通过补充文件确认，而非仅口头约定。</span>
+          </li>
+        </ul>
+
+        <div class="notice">
+          <h3>关于模板使用的说明</h3>
+          <p>平台提供的结构、条款框架与用语示例，目的是帮助你把内容组织清楚。涉及具体权利义务、法律责任、行业监管要求的材料，建议结合实际情况由具备相应专业能力的人员审核后再定稿。</p>
+        </div>
+      </div>
+
+      <aside class="side">
+        <h3>起草前快速自问</h3>
+        <ul>
+          <li>这份材料要解决的核心问题是什么？</li>
+          <li>读者最关心哪三个信息？</li>
+          <li>关键事实是否有可查证的来源？</li>
+          <li>需要对方在什么时间前做什么？</li>
+          <li>有没有可能产生歧义的表述？</li>
+          <li>附件是否齐全、是否被正文引用？</li>
+        </ul>
+        <div class="side-cta">
+          <p>把这些问题答完再动笔，通常能省下大半修改时间。</p>
+          <a class="btn btn-primary" href="#start" style="width:100%;">进入起草工作台</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 适用场景 -->
+  <section class="alt" id="scenes">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">适用场景</span>
+        <h2>谁在用 17.C 起草材料</h2>
+        <p>不同角色的起草重点不同，下表按常见使用场景说明关注点与建议做法。</p>
+      </div>
+
+      <table class="scene-table">
+        <thead>
+          <tr>
+            <th>使用角色</th>
+            <th>常见材料</th>
+            <th>起草关注点</th>
+            <th>建议做法</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>企业行政</td>
+            <td>通知、通报、会议纪要、制度</td>
+            <td>事项表述准确、时限清楚、执行部门明确</td>
+            <td>先固定文种骨架，再逐项填写事项与责任人</td>
+          </tr>
+          <tr>
+            <td>业务与采购</td>
+            <td>合同、订单确认、补充协议</td>
+            <td>标的、价格、交付、验收与违约处理</td>
+            <td>用检查清单逐条核对，金额与日期交叉验证</td>
+          </tr>
+          <tr>
+            <td>项目管理</td>
+            <td>方案、计划、进度报告</td>
+            <td>目标可衡量、任务可分解、风险有预案</td>
+            <td>结论先行，用表格呈现任务与时间节点</td>
+          </tr>
+          <tr>
+            <td>人事与培训</td>
+            <td>岗位说明、培训通知、承诺书</td>
+            <td>表述合规、无歧视性用语、权利义务对等</td>
+            <td>参考通行写法，重要内容经内部审核</td>
+          </tr>
+          <tr>
+            <td>个人用户</td>
+            <td>说明函、申请书、委托材料</td>
+            <td>一函一事、请求明确、信息完整</td>
+            <td>先写清缘由与请求，再补充必要证明材料</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">常见问题</span>
+        <h2>关于起草与使用的常见疑问</h2>
+        <p>以下回答针对使用过程中的高频问题，供参考判断。</p>
+      </div>
+
+      <div class="faq">
+        <details open>
+          <summary>17.C 起草官网可以直接生成完整可用的正式文件吗？</summary>
+          <p>平台提供的是结构框架、写作要点与格式参考，帮助你更快地组织内容。最终文本仍需结合你的实际情况填写、核对与确认。涉及法律效力、行业监管或单位内部审批的材料，建议按相应流程审核后再使用。</p>
+        </details>
+        <details>
+          <summary>模板里的条款可以直接照搬吗？</summary>
+          <p>不建议直接照搬。模板的作用是提示你应该考虑哪些方面，而不是替代具体约定。不同交易结构、不同地区要求、不同单位制度都可能影响条款写法，照搬容易出现与实际情况不符的表述。</p>
+        </details>
+        <details>
+          <summary>起草一份材料一般需要多长时间？</summary>
+          <p>取决于材料复杂度和信息准备程度。结构清晰、事实齐备的简单通知类材料，通常可以较快完成；涉及多方权责、金额较大或需要内部多轮讨论的材料，建议预留充足的核对与审阅时间。</p>
+        </details>
+        <details>
+          <summary>多人协作修改时如何避免版本混乱？</summary>
+          <p>建议约定统一的修改规则：由一人负责汇总，修改处使用批注说明原因，重要调整保留历史版本。平台提供的版本记录功能可以辅助对比差异，但最终仍需人工确认定稿版本。</p>
+        </details>
+        <details>
+          <summary>格式方面最容易出错的地方有哪些？</summary>
+          <p>常见问题包括：层次序号混用、日期写法不统一、金额大小写不一致、主体名称前后不同、附件未被正文引用、落款与正文之间缺少必要区分。定稿前逐项检查这几处，能减少大部分格式类返工。</p>
+        </details>
+        <details>
+          <summary>使用平台是否需要安装软件？</summary>
+          <p>不需要。通过浏览器访问即可使用主要起草与编辑功能，适合在不同设备间切换处理材料。具体功能范围以实际页面提供的能力为准。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo">
+          <span class="logo-mark">17C</span>
+          <span>17.C 起草官网<small>在线文档起草与规范写作</small></span>
+        </div>
+        <p>面向合同、公文、报告、方案等常见材料，提供结构模板、写作要点与格式参考，帮助你把材料写清楚、写完整、写得可执行。</p>
+      </div>
+      <div>
+        <h4>文档类型</h4>
+        <ul>
+          <li><a href="#types">合同与协议</a></li>
+          <li><a href="#types">通知与通报</a></li>
+          <li><a href="#types">报告与总结</a></li>
+          <li><a href="#types">方案与计划</a></li>
+          <li><a href="#types">制度与规程</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>使用帮助</h4>
+        <ul>
+          <li><a href="#start">起草流程</a></li>
+          <li><a href="#features">功能说明</a></li>
+          <li><a href="#rules">规范要点</a></li>
+          <li><a href="#scenes">适用场景</a></li>
+          <li><a href="#faq">常见问题</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>相关说明</h4>
+        <ul>
+          <li><a href="#rules">模板使用说明</a></li>
+          <li><a href="#rules">内容审核建议</a></li>
+          <li><a href="#faq">版本与协作</a></li>
+          <li><a href="#faq">格式检查</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 17.C 起草官网 · 页面内容为写作参考，不构成法律意见或专业建议</span>
+      <span>涉及具体权利义务的材料，请结合实际情况审核后使用</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // 平滑滚动到锚点（兼容不支持 scroll-behavior 的浏览器）
+  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var id = this.getAttribute('href');
+      if (id === '#' || id.length < 2) return;
+      var target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      var offset = 84;
+      var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    });
+  });
+
+  // 同时只展开一个常见问题（可选交互，保持信息密度）
+  var faqItems = document.querySelectorAll('#faq details');
+  faqItems.forEach(function (item) {
+    item.addEventListener('toggle', function () {
+      if (!item.open) return;
+      faqItems.forEach(function (other) {
+        if (other !== item) other.open = false;
+      });
+    });
+  });
+</script>
+
+</body>
+  </html>
